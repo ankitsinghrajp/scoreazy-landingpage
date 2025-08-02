@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Sparkles, Target, Users, Zap, Trophy, Smile, Brain, Star, Award, BookOpen, Heart, ArrowRight, ChevronDown, ChevronUp } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-
+import { ReactNode } from "react";
 const faqs = [
   {
     question: "What age group is this course designed for?",
@@ -109,7 +109,15 @@ const benefits = [
   }
 ];
 
-const FloatingElement = ({ children, delay = "0s", className = "" }) => (
+const FloatingElement = ({
+  children,
+  delay = "0s",
+  className = "",
+}: {
+  children: ReactNode;
+  delay?: string;
+  className?: string;
+}) => (
   <div 
     className={`animate-float ${className}`}
     style={{
@@ -123,21 +131,23 @@ const FloatingElement = ({ children, delay = "0s", className = "" }) => (
   </div>
 );
 
+
 export default function HOME() {
-  const [openItems, setOpenItems] = useState([]);
+  const [openItems, setOpenItems] = useState<number[]>([]);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
 
-  const toggleItem = (index) => {
-    setOpenItems(prev => 
-      prev.includes(index) 
-        ? prev.filter(item => item !== index)
-        : [...prev, index]
-    );
-  };
+  const toggleItem = (index: number) => {
+  setOpenItems(prev =>
+    prev.includes(index)
+      ? prev.filter(item => item !== index)
+      : [...prev, index]
+  );
+};
+
 
   return (
     <div className="min-h-screen bg-white overflow-hidden">
